@@ -160,7 +160,7 @@
       <div style="margin: 24px 0;"></div>
       <div class="nav-label">Intelligence</div>
       <div class="nav-item" data-tab="ai" style="color: #60A5FA;" title="AI Predictions">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
         <span class="nav-item-text">AI Predictions</span>
       </div>
     </div>
@@ -388,57 +388,120 @@
     <!-- TAB: RISK & COMPLIANCE -->
     <div class="tab-content" id="tab-risk" style="display: none;">
       <div class="dashboard">
-        <div class="page-header">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
           <div>
             <h1 class="page-title">Risk & Compliance Center</h1>
             <p class="page-subtitle">Security posture and automated compliance auditing.</p>
           </div>
+          <div style="display: flex; gap: 12px;">
+             <span class="badge yellow" style="padding: 8px 12px; font-size: 12px; display: flex; align-items: center; gap: 6px;">
+               <div style="width: 8px; height: 8px; background: var(--risk-med); border-radius: 50%;"></div>
+               2 Action Items
+             </span>
+          </div>
         </div>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-          <div class="panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px;">
-            <div class="scanner-box">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <div class="scanner-line"></div>
+        <!-- Top Metrics -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+           <div class="panel" style="padding: 16px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                 <div style="color: var(--text-muted); font-size: 12px; margin-bottom: 4px;">Average Compliance Score</div>
+                 <div style="font-size: 24px; font-weight: 700; color: white;">92<span style="font-size: 14px; color: var(--text-muted);">/100</span></div>
+              </div>
+              <div style="width: 48px; height: 48px; position: relative;">
+                 <canvas id="riskScoreChart"></canvas>
+                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: white;">A</div>
+              </div>
+           </div>
+           <div class="panel" style="padding: 16px;">
+              <div style="color: var(--text-muted); font-size: 12px; margin-bottom: 4px;">High-Risk Vendors</div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--risk-high);">4 <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;">needs review</span></div>
+           </div>
+           <div class="panel" style="padding: 16px;">
+              <div style="color: var(--text-muted); font-size: 12px; margin-bottom: 4px;">Automated Audits Run</div>
+              <div style="font-size: 24px; font-weight: 700; color: white;">1,284 <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;">(This Month)</span></div>
+           </div>
+        </div>
+
+        <div class="charts-grid">
+          <!-- Continuous Audit Scanner (Updated) -->
+          <div class="panel" style="display: flex; flex-direction: column; justify-content: center; padding: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+               <h3 style="color: white; font-size: 15px; font-weight: 600;">Continuous Audit Engine</h3>
+               <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--accent-primary); background: rgba(59, 130, 246, 0.1); padding: 4px 8px; border-radius: 4px;">
+                  <div style="width: 6px; height: 6px; background: var(--accent-primary); border-radius: 50%; box-shadow: 0 0 6px var(--accent-primary);"></div>
+                  SCANNING
+               </div>
             </div>
-            <h3 style="color: white; font-size: 15px; margin-bottom: 8px;">Continuous Audit Active</h3>
-            <p style="color: var(--text-muted); text-align: center; max-width: 300px; line-height: 1.5; margin-bottom: 24px;">
-              Agent is currently analyzing SOC2 and HIPAA compliance certificates across 142 vendors.
-            </p>
-            <div style="width: 100%; max-width: 300px;">
-              <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
-                <span>Scanning AWS SOC2 Type II</span>
-                <span>68%</span>
+
+            <div style="display: flex; align-items: center; gap: 24px;">
+              <div class="scanner-box" style="margin-bottom: 0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <div class="scanner-line"></div>
               </div>
-              <div style="width: 100%; height: 4px; background: #1F2937; border-radius: 2px; overflow: hidden;">
-                 <div style="height: 100%; width: 68%; background: var(--accent-primary); border-radius: 2px;"></div>
+              <div style="flex: 1;">
+                <div style="color: white; font-size: 13px; font-weight: 500; margin-bottom: 4px;">Analyzing AWS SOC2 Type II Report...</div>
+                <div style="color: var(--text-muted); font-size: 11px; margin-bottom: 12px; line-height: 1.4;">NLP is extracting key security controls and matching against internal policy requirements.</div>
+                <div style="width: 100%;">
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--accent-primary); margin-bottom: 6px;">
+                    <span>Document Processing</span>
+                    <span>68%</span>
+                  </div>
+                  <div style="width: 100%; height: 4px; background: #1F2937; border-radius: 2px; overflow: hidden;">
+                     <div style="height: 100%; width: 68%; background: var(--accent-primary); border-radius: 2px;"></div>
+                  </div>
+                </div>
               </div>
+            </div>
+            
+            <div style="margin-top: 30px; border-top: 1px dashed var(--border-color); padding-top: 20px;">
+               <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px;">Vendor Compliance Posture</div>
+               <div style="display: flex; gap: 2px; height: 32px;">
+                 <div style="flex: 8.5; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 4px 0 0 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--risk-low); font-weight: 500;">85% Optimal</div>
+                 <div style="flex: 1; background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.3); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--risk-med); font-weight: 500;">11%</div>
+                 <div style="flex: 0.5; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 0 4px 4px 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--risk-high); font-weight: 500;">4%</div>
+               </div>
             </div>
           </div>
           
           <div class="panel">
             <h3 style="color: white; margin-bottom: 16px; font-size: 14px; font-weight: 600;">Recent Audit Logs</h3>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="padding: 12px; background: #111827; border: 1px solid #1F2937; border-radius: 6px; border-left: 3px solid var(--risk-low);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                  <strong style="color: #E5E7EB; font-size: 13px; font-weight: 500;">Microsoft Azure HIPAA Check</strong>
-                  <span style="color: var(--risk-low); font-size: 11px; font-weight: 600;">PASSED</span>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="padding: 12px; background: rgba(10, 15, 28, 0.5); border: 1px solid var(--border-color); border-radius: 6px; border-left: 3px solid var(--risk-high); display: flex; align-items: flex-start; gap: 12px;">
+                <div style="width: 28px; height: 28px; background: rgba(239, 68, 68, 0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--risk-high)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                 </div>
-                <div style="color: var(--text-muted); font-size: 12px;">Valid until Dec 2026. Data residency confirmed.</div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <strong style="color: white; font-size: 13px; font-weight: 500;">Stripe ISO 27001 Status</strong>
+                    <span style="color: var(--text-muted); font-size: 11px;">10m ago</span>
+                  </div>
+                  <div style="color: #9CA3AF; font-size: 12px; line-height: 1.4;">New certificate uploaded does not match cryptographic signature of issuing authority. Flagged for manual review.</div>
+                </div>
               </div>
-              <div style="padding: 12px; background: #111827; border: 1px solid #1F2937; border-radius: 6px; border-left: 3px solid var(--risk-med);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                  <strong style="color: #E5E7EB; font-size: 13px; font-weight: 500;">Oracle Database License</strong>
-                  <span style="color: var(--risk-med); font-size: 11px; font-weight: 600;">EXPIRING SOON</span>
+              <div style="padding: 12px; background: rgba(10, 15, 28, 0.5); border: 1px solid var(--border-color); border-radius: 6px; border-left: 3px solid var(--risk-med); display: flex; align-items: flex-start; gap: 12px;">
+                <div style="width: 28px; height: 28px; background: rgba(245, 158, 11, 0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--risk-med)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
-                <div style="color: var(--text-muted); font-size: 12px;">Enterprise agreement expires in 14 days.</div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <strong style="color: white; font-size: 13px; font-weight: 500;">Oracle Database License</strong>
+                    <span style="color: var(--text-muted); font-size: 11px;">1h ago</span>
+                  </div>
+                  <div style="color: #9CA3AF; font-size: 12px; line-height: 1.4;">Enterprise agreement expires in 14 days. Procurement team notified via Slack.</div>
+                </div>
               </div>
-              <div style="padding: 12px; background: #111827; border: 1px solid #1F2937; border-radius: 6px; border-left: 3px solid var(--risk-low);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                  <strong style="color: #E5E7EB; font-size: 13px; font-weight: 500;">Cisco Networking ISO 27001</strong>
-                  <span style="color: var(--risk-low); font-size: 11px; font-weight: 600;">PASSED</span>
+              <div style="padding: 12px; background: rgba(10, 15, 28, 0.5); border: 1px solid var(--border-color); border-radius: 6px; border-left: 3px solid var(--risk-low); display: flex; align-items: flex-start; gap: 12px;">
+                <div style="width: 28px; height: 28px; background: rgba(16, 185, 129, 0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
+                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--risk-low)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                <div style="color: var(--text-muted); font-size: 12px;">Certificate verified on June 20, 2026.</div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <strong style="color: white; font-size: 13px; font-weight: 500;">Cisco Networking HIPAA Check</strong>
+                    <span style="color: var(--text-muted); font-size: 11px;">3h ago</span>
+                  </div>
+                  <div style="color: #9CA3AF; font-size: 12px; line-height: 1.4;">BAA (Business Associate Agreement) successfully verified and archived.</div>
+                </div>
               </div>
             </div>
           </div>
@@ -449,56 +512,263 @@
     <!-- TAB: SLA MONITORING -->
     <div class="tab-content" id="tab-sla" style="display: none;">
       <div class="dashboard">
-        <div class="page-header">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
           <div>
             <h1 class="page-title">SLA Monitoring</h1>
             <p class="page-subtitle">Real-time tracking of uptime guarantees for mission-critical vendors.</p>
           </div>
+          <div style="display: flex; gap: 16px; align-items: center;">
+             <div style="text-align: right;">
+               <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Global Uptime (30d)</div>
+               <div style="font-size: 24px; font-weight: 700; color: white;">99.98<span style="font-size: 16px; color: var(--text-muted);">%</span></div>
+             </div>
+             <div style="width: 48px; height: 48px; border-radius: 50%; border: 4px solid var(--risk-low); display: flex; align-items: center; justify-content: center;">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--risk-low)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+             </div>
+          </div>
         </div>
-        
+
+        <!-- Uptime Heatmap -->
         <div class="panel" style="margin-bottom: 20px;">
-           <div style="display: flex; justify-content: space-between; align-items: center;">
-             <div>
-               <h2 style="color: white; font-size: 15px; font-weight: 600; margin-bottom: 4px;">Global System Status</h2>
-               <p style="color: var(--text-muted); font-size: 13px;">Current average uptime for trailing 30 days is <strong style="color: white;">99.98%</strong>.</p>
-             </div>
-             <div class="badge green" style="padding: 6px 12px; display: flex; align-items: center; gap: 6px; font-size: 12px;">
-               <div style="width: 6px; height: 6px; background: var(--risk-low); border-radius: 50%;"></div>
-               ALL SYSTEMS OPERATIONAL
-             </div>
-           </div>
+          <div class="panel-header">
+             <div class="panel-title">90-Day Uptime Heatmap (Tier 1 Vendors)</div>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; height: 48px; align-content: flex-start;" id="uptime-heatmap">
+            <!-- JS will fill this -->
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted);">
+            <span>90 Days Ago</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>Outage</span>
+              <div style="width: 10px; height: 10px; background: var(--risk-high); border-radius: 2px;"></div>
+              <div style="width: 10px; height: 10px; background: var(--risk-med); border-radius: 2px;"></div>
+              <div style="width: 10px; height: 10px; background: var(--risk-low); border-radius: 2px;"></div>
+              <span>100% Uptime</span>
+            </div>
+            <span>Today</span>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <!-- Active Incident Timeline -->
+          <div class="panel">
+            <div class="panel-header" style="margin-bottom: 20px;">
+              <div class="panel-title" style="color: var(--risk-high); display: flex; align-items: center; gap: 8px;">
+                <div style="width: 8px; height: 8px; background: var(--risk-high); border-radius: 50%; box-shadow: 0 0 8px var(--risk-high);"></div>
+                Active Incident: AWS us-east-1
+              </div>
+            </div>
+            <div style="position: relative; padding-left: 20px;">
+               <div style="position: absolute; left: 4px; top: 8px; bottom: 0; width: 2px; background: #374151;"></div>
+               
+               <div style="position: relative; margin-bottom: 24px;">
+                 <div style="position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; background: var(--bg-panel); border: 2px solid var(--risk-high); border-radius: 50%;"></div>
+                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Today, 08:14 AM</div>
+                 <div style="font-size: 13px; color: white; font-weight: 500;">Latency Spikes Detected</div>
+                 <div style="font-size: 12px; color: #9CA3AF; margin-top: 4px; line-height: 1.4;">API gateway P99 latency exceeded 2000ms threshold for 3 consecutive intervals.</div>
+               </div>
+               
+               <div style="position: relative; margin-bottom: 24px;">
+                 <div style="position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; background: var(--bg-panel); border: 2px solid var(--risk-med); border-radius: 50%;"></div>
+                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Today, 08:16 AM</div>
+                 <div style="font-size: 13px; color: white; font-weight: 500;">AI Auto-Remediation Triggered</div>
+                 <div style="font-size: 12px; color: #9CA3AF; margin-top: 4px; line-height: 1.4;">Traffic routing updated. 20% of load shifted to `us-west-2`.</div>
+               </div>
+
+               <div style="position: relative;">
+                 <div style="position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; background: var(--risk-high); border-radius: 50%; box-shadow: 0 0 8px var(--risk-high);"></div>
+                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Today, 08:22 AM (Current)</div>
+                 <div style="font-size: 13px; color: white; font-weight: 500;">Monitoring Failover Health</div>
+                 <div style="font-size: 12px; color: #9CA3AF; margin-top: 4px; line-height: 1.4;">Awaiting AWS confirmation of restored service in primary region.</div>
+               </div>
+            </div>
+          </div>
+
+          <!-- Vendor Status Table -->
+          <div class="panel" style="padding: 0; display: flex; flex-direction: column;">
+            <div class="panel-header" style="padding: 20px 20px 0 20px;">
+              <div class="panel-title">Critical Vendor SLA Status</div>
+            </div>
+            <table class="vendor-table" style="margin-top: 12px;">
+              <tr>
+                <th>Vendor System</th>
+                <th>Target SLA</th>
+                <th>Current (30d)</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td><strong style="color:white; font-weight: 500;">AWS Core Infrastructure</strong></td>
+                <td>99.99%</td>
+                <td><span style="font-weight: 600; color: var(--risk-high);">99.91%</span></td>
+                <td><span style="color:var(--risk-high); font-weight: 500;">Warning (us-east-1)</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:white; font-weight: 500;">Microsoft Azure AD</strong></td>
+                <td>99.95%</td>
+                <td><span style="font-weight: 500; color: white;">100.00%</span></td>
+                <td><span style="color:var(--risk-low); font-weight: 500;">Optimal</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:white; font-weight: 500;">Datadog Log Management</strong></td>
+                <td>99.90%</td>
+                <td><span style="font-weight: 500; color: white;">99.98%</span></td>
+                <td><span style="color:var(--risk-low); font-weight: 500;">Optimal</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color:white; font-weight: 500;">Stripe Payments API</strong></td>
+                <td>99.99%</td>
+                <td><span style="font-weight: 500; color: white;">100.00%</span></td>
+                <td><span style="color:var(--risk-low); font-weight: 500;">Optimal</span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: VENDOR DIRECTORY -->
+    <div class="tab-content" id="tab-directory" style="display: none;">
+      <div class="dashboard">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <div>
+            <h1 class="page-title">Vendor Directory</h1>
+            <p class="page-subtitle">Manage, review, and analyze 142 integrated IT vendors.</p>
+          </div>
+          <div style="display: flex; gap: 12px;">
+             <button class="btn btn-secondary" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="21" y1="18" x2="3" y2="18"></line></svg>
+                Filter
+             </button>
+             <button class="btn" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Add Vendor
+             </button>
+          </div>
         </div>
 
         <div class="panel" style="padding: 0;">
-          <div class="panel-header" style="padding: 20px 20px 0 20px;">
-            <div class="panel-title">Critical Vendor SLA Status</div>
+          <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02);">
+            <div style="position: relative;">
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="position: absolute; left: 10px; top: 10px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+               <input type="text" placeholder="Search vendors by name, category, or risk..." style="background: var(--bg-dark); border: 1px solid var(--border-color); color: white; padding: 8px 12px 8px 32px; border-radius: 6px; width: 320px; outline: none; font-size: 13px;">
+            </div>
+            <div style="display: flex; gap: 16px; font-size: 12px; color: var(--text-muted);">
+               <div><strong style="color: white;">142</strong> Total</div>
+               <div><strong style="color: var(--risk-high);">4</strong> Critical</div>
+               <div><strong style="color: var(--risk-low);">118</strong> Healthy</div>
+            </div>
           </div>
-          <table class="vendor-table">
-            <tr>
-              <th>Vendor System</th>
-              <th>Target SLA</th>
-              <th>Current (30d)</th>
+          
+          <table class="vendor-table" style="margin-top: 0;">
+            <tr style="background: rgba(10, 15, 28, 0.8);">
+              <th style="padding-left: 20px;">Vendor Name</th>
+              <th>Category</th>
               <th>Status</th>
+              <th>Risk Profile</th>
+              <th>30-Day Reliability</th>
+              <th>Spend (YTD)</th>
+              <th></th>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color); transition: background 0.2s;">
+              <td style="padding-left: 20px;">
+                 <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #F59E0B;">A</div>
+                    <div>
+                       <strong style="color:white; font-weight: 500;">AWS Cloud Services</strong>
+                       <div style="font-size: 11px; color: var(--text-muted);">Amazon Web Services</div>
+                    </div>
+                 </div>
+              </td>
+              <td>Infrastructure</td>
+              <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--risk-low); border: 1px solid rgba(16, 185, 129, 0.2);">Active</span></td>
+              <td><span class="badge red">Critical</span></td>
+              <td>
+                 <svg width="60" height="20" viewBox="0 0 60 20" style="display: block;">
+                    <polyline points="0,10 10,12 20,8 30,15 40,5 50,18 60,10" fill="none" stroke="var(--risk-high)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                 </svg>
+              </td>
+              <td style="font-family: monospace; font-size: 13px;">$1.24M</td>
+              <td style="text-align: right; padding-right: 20px;">
+                 <button style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding-left: 20px;">
+                 <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #EF4444;">O</div>
+                    <div>
+                       <strong style="color:white; font-weight: 500;">Oracle Database Systems</strong>
+                       <div style="font-size: 11px; color: var(--text-muted);">Oracle Corp.</div>
+                    </div>
+                 </div>
+              </td>
+              <td>Data Systems</td>
+              <td><span class="badge" style="background: rgba(245, 158, 11, 0.1); color: var(--risk-med); border: 1px solid rgba(245, 158, 11, 0.2);">Review Pending</span></td>
+              <td><span class="badge yellow">Medium</span></td>
+              <td>
+                 <svg width="60" height="20" viewBox="0 0 60 20" style="display: block;">
+                    <polyline points="0,15 10,12 20,13 30,14 40,11 50,10 60,12" fill="none" stroke="var(--risk-med)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                 </svg>
+              </td>
+              <td style="font-family: monospace; font-size: 13px;">$850K</td>
+              <td style="text-align: right; padding-right: 20px;">
+                 <button style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding-left: 20px;">
+                 <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #10B981;">P</div>
+                    <div>
+                       <strong style="color:white; font-weight: 500;">Palo Alto Networks</strong>
+                       <div style="font-size: 11px; color: var(--text-muted);">Network Security</div>
+                    </div>
+                 </div>
+              </td>
+              <td>Security</td>
+              <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--risk-low); border: 1px solid rgba(16, 185, 129, 0.2);">Active</span></td>
+              <td><span class="badge green" style="background: rgba(16, 185, 129, 0.1); color: var(--risk-low);">Low</span></td>
+              <td>
+                 <svg width="60" height="20" viewBox="0 0 60 20" style="display: block;">
+                    <polyline points="0,8 10,9 20,7 30,8 40,7 50,6 60,7" fill="none" stroke="var(--risk-low)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                 </svg>
+              </td>
+              <td style="font-family: monospace; font-size: 13px;">$320K</td>
+              <td style="text-align: right; padding-right: 20px;">
+                 <button style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
+              </td>
             </tr>
             <tr>
-              <td><strong style="color:white; font-weight: 500;">AWS Core Infrastructure</strong></td>
-              <td>99.99%</td>
-              <td><span style="font-weight: 500;">99.91%</span></td>
-              <td><span style="color:var(--risk-med); font-weight: 500;">Warning (us-east-1)</span></td>
-            </tr>
-            <tr>
-              <td><strong style="color:white; font-weight: 500;">Microsoft Azure AD</strong></td>
-              <td>99.95%</td>
-              <td><span style="font-weight: 500; color: white;">100.00%</span></td>
-              <td><span style="color:var(--risk-low); font-weight: 500;">Optimal</span></td>
-            </tr>
-            <tr>
-              <td><strong style="color:white; font-weight: 500;">Datadog Log Management</strong></td>
-              <td>99.90%</td>
-              <td><span style="font-weight: 500; color: white;">99.98%</span></td>
-              <td><span style="color:var(--risk-low); font-weight: 500;">Optimal</span></td>
+              <td style="padding-left: 20px;">
+                 <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #8B5CF6;">D</div>
+                    <div>
+                       <strong style="color:white; font-weight: 500;">Datadog</strong>
+                       <div style="font-size: 11px; color: var(--text-muted);">Observability</div>
+                    </div>
+                 </div>
+              </td>
+              <td>Monitoring</td>
+              <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--risk-low); border: 1px solid rgba(16, 185, 129, 0.2);">Active</span></td>
+              <td><span class="badge green" style="background: rgba(16, 185, 129, 0.1); color: var(--risk-low);">Low</span></td>
+              <td>
+                 <svg width="60" height="20" viewBox="0 0 60 20" style="display: block;">
+                    <polyline points="0,18 10,15 20,10 30,12 40,8 50,6 60,2" fill="none" stroke="var(--risk-low)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                 </svg>
+              </td>
+              <td style="font-family: monospace; font-size: 13px;">$180K</td>
+              <td style="text-align: right; padding-right: 20px;">
+                 <button style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
+              </td>
             </tr>
           </table>
+          <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.01);">
+             <div style="font-size: 12px; color: var(--text-muted);">Showing 1-4 of 142 vendors</div>
+             <div style="display: flex; gap: 8px;">
+                <button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;" disabled>Previous</button>
+                <button class="btn btn-secondary" style="padding: 4px 12px; font-size: 12px;">Next</button>
+             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -864,6 +1134,43 @@
             ticks: { display: false, min: 0, max: 100 }
           }
         }
+      }
+    });
+
+    // Generate Uptime Heatmap
+    const heatmapContainer = document.getElementById('uptime-heatmap');
+    if(heatmapContainer) {
+      let heatmapHTML = '';
+      for(let i=0; i<85; i++) {
+        // 95% chance of green, 4% chance of yellow, 1% chance of red
+        const rand = Math.random();
+        let color = 'var(--risk-low)';
+        if(rand > 0.95 && rand < 0.99) color = 'var(--risk-med)';
+        if(rand >= 0.99) color = 'var(--risk-high)';
+        // Make the last few days yellow/red for the current AWS incident
+        if(i === 83 || i === 84) color = 'var(--risk-high)';
+        
+        heatmapHTML += `<div style="width: 12px; height: 12px; background: ${color}; border-radius: 2px; opacity: 0.8;" title="Day ${i-85}"></div>`;
+      }
+      heatmapContainer.innerHTML = heatmapHTML;
+    }
+
+    // Risk Score Chart
+    const ctxRiskScore = document.getElementById('riskScoreChart').getContext('2d');
+    new Chart(ctxRiskScore, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [92, 8],
+          backgroundColor: ['#10B981', '#1F2937'],
+          borderWidth: 0,
+          cutout: '75%'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } }
       }
     });
   </script>
